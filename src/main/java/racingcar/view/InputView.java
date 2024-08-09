@@ -14,7 +14,9 @@ public class InputView {
     }
   }
 
-  public void inputTryCount() {
+  public int inputTryCount() {
     // TODO Validation 추가
+    String tryCount = Console.readLine();
+    return Integer.parseInt(tryCount);
   }
 }

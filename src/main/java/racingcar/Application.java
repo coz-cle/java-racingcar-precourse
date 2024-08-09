@@ -14,6 +14,7 @@ public class Application {
     inputView.inputCarName();
 
     outputView.printInputTryCount();
+    inputView.inputTryCount();
 
   }
 }

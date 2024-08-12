@@ -12,15 +12,20 @@
 - [ ] Car 클래스 구현
     - [x] 각 자동차에 이름을 부여할 수 있다.
     - [x] 자동차는 자신의 이름을 반환할 수 있다.
-    - [ ] 자동차 이름은 쉼표(,)를 기준으로 구분한다.
-    - [x] 자동차 이름은 5자를 초과할 수 없다.
-    - [x] 자동차 이름은 빈값일 수 없다.
+    - [x] 자동차 이름은 쉼표(,)를 기준으로 구분한다.
     - [x] move 구현: random4이상시 움직임
     - [ ] getDistance: 차의 움직인 거리 getter
     - [ ] 자동차의 위치를 표시하는 Position 값 객체 생성
     - [ ] 첫 위치를 1로 시작하는 Car 생성자 구현
     - [x] 자동차가 한 칸 전진하는 forward()
     - [ ] 모든 자동차의 위치를 반환하는 carPositions()
+
+
+- [x] CarValidator 클래스 구현
+    - [x] 자동차 이름은 5자를 초과할 수 없다.
+    - [x] 자동차 이름은 빈값일 수 없다.
+    - [x] 자동차 이름은 특수문자일 수 없다.
+    - [x] 자동차 이름은 영어,숫자,한국어만 가능하다.
 
 
 - [ ] 경기 전체를 진행하는 Race 클래스 작성
@@ -30,9 +35,7 @@
 
 
 - [ ] InputView 구현
-    - [ ] 자동차 이름 입력
-    - [ ] 자동차 대수를 입력 받고 입력 값을 반환
-        - [ ] 숫자인 지 체크 후 NumberFormatException 발생 시 예외처리
+    - [x] 자동차 이름 입력
     - [ ] 시도할 회수를 입력 받고 입력 값을 반환
         - [ ] 숫자인 지 체크 후 NumberFormatException 발생 시 예외처리
 
@@ -176,14 +179,14 @@ jun : -----
 ```java
 public class Car {
 
-  private final String name;
-  private int position = 0;
+    private final String name;
+    private int position = 0;
 
-  public Car(String name) {
-    this.name = name;
-  }
+    public Car(String name) {
+        this.name = name;
+    }
 
-  // 추가 기능 구현
+    // 추가 기능 구현
 }
 ```
 

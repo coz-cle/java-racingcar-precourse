@@ -9,6 +9,20 @@ public class Application {
         // TODO 구현 진행
     }
 
+    private static List<Car> convertCarListFrom(String inputValue) {
+        List<Car> cars = new ArrayList<>();
+
+        List<String> names = Arrays.asList(inputValue.split(","));
+
+        validateCarNames(names);
+        for(String name : names){
+            name = name.trim();
+            validateCarName(name);
+            cars.add(new Car(name));
+        }
+        return cars;
+    }
+
     private static void validateCarName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throwException("자동차의 이름은 공백이 아니여야 한다.");

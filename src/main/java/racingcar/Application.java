@@ -23,6 +23,11 @@ public class Application {
         return cars;
     }
 
+	private static int convertToGameCount(String gameCount) {
+		validateGameCount(gameCount);
+		return convertStringToInt(gameCount);
+	}
+	
     private static void validateCarName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throwException("자동차의 이름은 공백이 아니여야 한다.");
@@ -43,7 +48,35 @@ public class Application {
             throwException("자동차의 이름은 중복되지 않아야 한다.");
         }
     }
+	
+	private static void validateGameCount(String inputValue) {
+		if(inputValue == null || inputValue.trim().isEmpty()) {
+			throwException("시도할 횟수는 입력되어야 한다.");
+		}
+		
+		if(!isConvertibleToInt(inputValue)){
+			throwException("시도할 횟수는 숫자만 입력되아야 한다.");
+		}
+		
+		final int gameCount = convertStringToInt(inputValue);
+		if(gameCount <= 0){
+			throwException("시도할 횟수는 1 이상이여야 한다.");
+		}
+	}
+	
+	private static boolean isConvertibleToInt(String inputValue) {
+		try {
+			Integer.parseInt(inputValue);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 
+	private static int convertStringToInt(String inputValue) {
+		return Integer.parseInt(inputValue);
+	}
+	
     private static void throwException(String message) {
         throw new IllegalArgumentException(EXCEPTION_MESSAGE_PREFIX + message);
     }

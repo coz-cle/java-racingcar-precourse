@@ -12,15 +12,24 @@ public class Application {
     private static List<Car> convertCarListFrom(String inputValue) {
         List<Car> cars = new ArrayList<>();
 
+	private static List<Car> createCars(List<String> carNames){
+		List<Car> cars = new ArrayList<>();
+		for (String carName : carNames) {
+			cars.add(new Car(carName));
+		}
+		return cars;
+	}
+	
+    private static List<String> convertListFrom(String inputValue) {
         List<String> names = Arrays.asList(inputValue.split(","));
 
         validateCarNames(names);
         for(String name : names){
             name = name.trim();
             validateCarName(name);
-            cars.add(new Car(name));
         }
-        return cars;
+		
+		return names;
     }
 
 	private static int convertToGameCount(String gameCount) {

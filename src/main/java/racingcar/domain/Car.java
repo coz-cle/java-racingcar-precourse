@@ -17,6 +17,14 @@ public class Car {
         return new Car(carName);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object diffCar) {
         if (this == diffCar) return true;

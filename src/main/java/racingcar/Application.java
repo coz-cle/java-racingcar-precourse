@@ -8,10 +8,6 @@ public class Application {
     public static void main(String[] args) {
         // TODO 구현 진행
     }
-
-    private static List<Car> convertCarListFrom(String inputValue) {
-        List<Car> cars = new ArrayList<>();
-
 	private static List<Car> createCars(List<String> carNames){
 		List<Car> cars = new ArrayList<>();
 		for (String carName : carNames) {
@@ -32,9 +28,9 @@ public class Application {
 		return names;
     }
 
-	private static int convertToGameCount(String gameCount) {
-		validateGameCount(gameCount);
-		return convertStringToInt(gameCount);
+	private static int convertToTotalRound(String totalRound) {
+		validateTotalRound(totalRound);
+		return convertStringToInt(totalRound);
 	}
 	
     private static void validateCarName(String name) {
@@ -58,7 +54,7 @@ public class Application {
         }
     }
 	
-	private static void validateGameCount(String inputValue) {
+	private static void validateTotalRound(String inputValue) {
 		if(inputValue == null || inputValue.trim().isEmpty()) {
 			throwException("시도할 횟수는 입력되어야 한다.");
 		}
@@ -67,8 +63,8 @@ public class Application {
 			throwException("시도할 횟수는 숫자만 입력되아야 한다.");
 		}
 		
-		final int gameCount = convertStringToInt(inputValue);
-		if(gameCount <= 0){
+		final int totalRound = convertStringToInt(inputValue);
+		if(totalRound <= 0){
 			throwException("시도할 횟수는 1 이상이여야 한다.");
 		}
 	}

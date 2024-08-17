@@ -1,67 +1,71 @@
 package racingcar;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.running.Round;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Game {
 	private final List<Car> cars;
 	private final int totalRound;
-	private final List<GameResult> results = new ArrayList<>();
-	
-	// TODO 난수 생성 로직을 구조화하여 생성자로 받기
-	private final Random random = new Random();
+	private final List<Round> results = new ArrayList<>();
 	
 	public Game(List<Car> cars, int totalRound) {
 		this.cars = cars;
 		this.totalRound = totalRound;
 	}
 	
-	public void run() {
+	public final void run() {
 		int count = this.totalRound;
-		
-		while (count > 0){
+		while (count > 0) {
 			startRacing();
 			count--;
-			writeResult(this.totalRound - count);
+			int thisRound = this.totalRound - count;
+			writeResult(thisRound, this.cars);
 		}
 	}
 	
-	public List<GameResult> getResultList(){
-		if(isRunning()){
+	public List<Round> getResults() {
+		if (isRunning()) {
 			throw new IllegalStateException("게임을 진행중이다.");
 		}
 		return this.results;
 	}
 	
+	private boolean isRunning() {
+		return this.totalRound < this.results.size();
+	}
+	
 	private void startRacing() {
 		cars.forEach(car -> {
-			if(isGo()){
+			int pickNumber = Randoms.pickNumberInRange(1, 9);
+			if (isGo(pickNumber)) {
 				car.addPosition();
 			}
 		});
 	}
 	
-	private void writeResult(int round) {
-		this.results.add(new GameResult(round, this.cars));
+	private boolean isGo(int pickNumber) {
+		return pickNumber >= 4;
 	}
 	
-	private boolean isGo(){
-		return random.nextInt(10) >= 4;
+	private void writeResult(int thisRound, List<Car> cars) {
+		Round round = new Round(thisRound);
+		round.createResult(cars);
+		addResults(round);
 	}
 	
-	
-	private boolean isRunning(){
-		return this.totalRound == this.results.size();
+	private void addResults(Round round) {
+		this.results.add(round);
 	}
 	
-	public static class GameResult {
-		private final int round;
-		private final List<Car> cars;
-		
-		public GameResult(int round, List<Car> cars) {
-			this.round = round;
-			this.cars = cars;
-		}
+	@Override
+	public String toString() {
+		return "Game{" +
+				"cars=" + cars +
+				", totalRound=" + totalRound +
+				", results=" + results +
+				'}';
 	}
 }

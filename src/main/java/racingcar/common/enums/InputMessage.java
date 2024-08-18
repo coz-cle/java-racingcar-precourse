@@ -1,4 +1,4 @@
-package racingcar.common;
+package racingcar.common.enums;
 
 public enum InputMessage implements EnumUtil<String, String>{
 

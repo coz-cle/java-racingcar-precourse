@@ -1,5 +1,6 @@
 package racingcar.domain;
 
+import racingcar.common.util.NumberGenerator;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -8,23 +9,40 @@ import java.util.stream.Collectors;
 public class Cars {
 
     private final List<Car> cars;
+    private final NumberGenerator numberGenerator;
 
-    private Cars(List<String> inputCarNames) {
+    private Cars(
+            final List<String> inputCarNames,
+            final NumberGenerator numberGenerator
+    ) {
         this.cars = create(inputCarNames);
+        this.numberGenerator = numberGenerator;
     }
 
-    private List<Car> create(List<String> inputCarNames) {
+    private List<Car> create(
+            final List<String> inputCarNames
+    ) {
         return inputCarNames.stream()
                 .map(Car::create)
                 .collect(Collectors.toList());
     }
 
-    public static Cars of(List<String> inputCarNames) {
-        return new Cars(inputCarNames);
+    public static Cars of(
+            final List<String> inputCarNames,
+            final NumberGenerator numberGenerator
+    ) {
+        return new Cars(inputCarNames, numberGenerator);
     }
 
     public List<Car> getCars() {
         return Collections.unmodifiableList(cars);
+    }
+
+    public void race() {
+        cars.forEach(car -> {
+            int fowardCondition = numberGenerator.generate();
+            car.move(fowardCondition);
+        });
     }
 
     @Override

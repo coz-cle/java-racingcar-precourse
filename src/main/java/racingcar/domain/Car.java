@@ -2,18 +2,35 @@ package racingcar.domain;
 
 import java.util.Objects;
 
+import static racingcar.common.constant.RaceConstant.CAR_FORWARD_NUMBER;
+
 public class Car {
     private final String name;
     private int position = 0;
 
-    private Car(final String name) {
+    private Car(
+            final String name
+    ) {
         this.name = name;
     }
-    public void move() {
-        // TODO: 자동차 전진 도메인 로직 구현 필요!
+
+    public void move(
+            final int fowordCondition
+    ) {
+        if(isFowardCar(fowordCondition)) {
+            position++;    
+        }
     }
 
-    public static Car create(final String carName) {
+    private static boolean isFowardCar(
+            final int fowordCondition
+    ) {
+        return fowordCondition >= CAR_FORWARD_NUMBER;
+    }
+
+    public static Car create(
+            final String carName
+    ) {
         return new Car(carName);
     }
 

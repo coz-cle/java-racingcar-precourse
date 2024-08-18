@@ -1,4 +1,4 @@
-package racingcar.common;
+package racingcar.common.enums;
 
 public interface EnumUtil<T1, T2> {
 

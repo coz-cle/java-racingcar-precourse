@@ -32,51 +32,64 @@ public class CarRaceController {
 
     public void race() {
         // 자동차 목록 입력 및 객체화
-        String carNames = getCatNamesInput();
-        CarNameValidator carValidation = validateCarName(carNames);
-        Cars cars = createCars(carValidation.CAR_NAMES);
+        CarNameValidator carNames = getCatNamesInput();
+        Cars cars = createCars(carNames.CAR_NAMES);
 
         // 경주 시도횟수 입력 및 객체화
-        String tryCount = getTryCountInput();
-        TryCountValidator tryCountValidator = validateTryCount(tryCount);
-        Race race = createRace(tryCountValidator.TRY_COUNT);
+        TryCountValidator tryCount = getTryCountInput();
+        Race race = createRace(tryCount.TRY_COUNT);
         int roundCount = race.getRoundCount();
 
-        // 자동차 경주 진행
+        // 자동차 경주 시작 및 진행과정 출력
         printRaceResult(cars, roundCount);
 
-        /**
-         * TODO: 우승한 자동차 목록 출력해야함!
-         */
+        // 우승한 자동차 이름 출력
+        printRaceWinner(cars);
     }
 
-    private String getCatNamesInput() {
-        return InputView.inputCarName();
+    private CarNameValidator getCatNamesInput() {
+        try {
+            return new CarNameValidator(InputView.inputCarName());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getCatNamesInput();
+        }
     }
 
-    private String getTryCountInput() {
-        return InputView.inputTryCount();
+    private TryCountValidator getTryCountInput() {
+        try {
+            return new TryCountValidator(InputView.inputTryCount());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getTryCountInput();
+        }
     }
 
-    private CarNameValidator validateCarName(String carNames) {
-        return new CarNameValidator(carNames);
-    }
-
-    private TryCountValidator validateTryCount(String tryCount) {
-        return new TryCountValidator(tryCount);
-    }
-
-    private Cars createCars(List<String> inputCarNames) {
+    private Cars createCars(
+            final List<String> inputCarNames
+    ) {
         return carsService.createCars(inputCarNames, numberGenerator);
     }
 
-    private Race createRace(String tryCount) {
+    private Race createRace(
+            final String tryCount
+    ) {
         return raceService.createRace(tryCount);
     }
 
-    private void printRaceResult(Cars cars, int roundCount) {
+    private void printRaceResult(
+            final Cars cars,
+            final int roundCount
+    ) {
         List<RaceResultResponse> raceResult = raceService.getRaceResult(cars, roundCount);
         outputView.printRaceResult(raceResult);
+    }
+
+    private void printRaceWinner(
+            final Cars cars
+    ) {
+        List<String> raceWinnerCarNames = raceService.getRaceWinnerCarNames(cars);
+        outputView.printRaceWinner(raceWinnerCarNames);
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static racingcar.common.constant.RaceConstant.WINNER_DELIMITER;
 import static racingcar.common.enums.OutputMessage.*;
 
 public class OutputView {
@@ -23,20 +24,22 @@ public class OutputView {
         StringBuilder result = new StringBuilder();
         result.append(CAR_RAGE_RESULT_MESSAGE.getValue());
         raceResult.forEach(raceResultDto -> createRaceResult(raceResultDto, result));
-        System.out.println(result.toString().trim());
+        System.out.println(result);
     }
 
     private void createRaceResult(RaceResultResponse raceResultDto, StringBuilder result) {
         raceResultDto.getRaceResult()
-                .forEach(carStatusDto -> createCarStatus(carStatusDto, result));
-        result.append("\n");
+                .forEach(carStatusDto -> {
+                    createCarStatus(carStatusDto, result);
+                    result.append("\n");
+                });
+
     }
 
     private void createCarStatus(CarStatusResponse carStatusDto, StringBuilder carStatus) {
         carStatus.append(carStatusDto.getCarName())
                 .append(CAR_NAME_AND_CAR_POSITION_DELIMITER.getValue())
-                .append(repeat(CAR_RACE_MARK.getValue(), carStatusDto.getCarPosition()))
-                .append("\n");
+                .append(repeat(CAR_RACE_MARK.getValue(), carStatusDto.getCarPosition()));
     }
 
     public String repeat(String raceMark, int carPosition) {
@@ -45,4 +48,11 @@ public class OutputView {
                 .collect(Collectors.joining());
     }
 
+    public void printRaceWinner(List<String> winners) {
+        StringBuilder result = new StringBuilder();
+        result.append("\n")
+                .append(CAR_RACE_WINNER_MESSAGE.getValue())
+                .append(String.join(WINNER_DELIMITER, winners));
+        System.out.println(result);
+    }
 }

@@ -1,12 +1,16 @@
-package racingcar.common;
+package racingcar.validator;
 
-import static racingcar.common.Constant.TRY_COUNT_PATTERN;
+import racingcar.common.constant.RaceConstant;
+
+import static racingcar.common.constant.RaceConstant.TRY_COUNT_PATTERN;
 
 public class TryCountValidator {
 
-    private final String TRY_COUNT;
+    public final String TRY_COUNT;
 
-    public TryCountValidator(String tryCount) {
+    public TryCountValidator(
+            final String tryCount
+    ) {
         TRY_COUNT = tryCount;
         isIntNumber();
     }
@@ -19,7 +23,7 @@ public class TryCountValidator {
     private void isIntNumber() {
         // String 형식 확인: 앞-0이 아닌 숫자, 이후-숫자
         if (!TRY_COUNT_PATTERN.matcher(TRY_COUNT).matches()) {
-            throw new IllegalArgumentException(Constant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
+            throw new IllegalArgumentException(RaceConstant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
         }
     }
 

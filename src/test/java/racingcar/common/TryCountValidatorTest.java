@@ -2,6 +2,8 @@ package racingcar.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.common.constant.RaceConstant;
+import racingcar.validator.TryCountValidator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -26,7 +28,7 @@ class TryCountValidatorTest {
         // when & then
         assertThatThrownBy(() -> new TryCountValidator(inputTryCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Constant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
+                .hasMessage(RaceConstant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
     }
 
     @Test
@@ -37,7 +39,7 @@ class TryCountValidatorTest {
         // when & then
         assertThatThrownBy(() -> new TryCountValidator(inputTryCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Constant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
+                .hasMessage(RaceConstant.TRY_COUNT_OUT_OF_RANGE_MESSAGE);
     }
 
 }

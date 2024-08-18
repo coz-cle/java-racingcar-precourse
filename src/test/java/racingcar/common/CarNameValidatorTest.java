@@ -3,10 +3,11 @@ package racingcar.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.validator.CarNameValidator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static racingcar.common.Constant.*;
+import static racingcar.common.constant.RaceConstant.*;
 
 class CarNameValidatorTest {
 

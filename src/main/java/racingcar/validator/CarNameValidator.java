@@ -1,17 +1,19 @@
-package racingcar.common;
+package racingcar.validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static racingcar.common.Constant.*;
+import static racingcar.common.constant.RaceConstant.*;
 
 public class CarNameValidator {
 
     private final String INPUT_CAR_NAMES;
     public final List<String> CAR_NAMES;
 
-    public CarNameValidator(String inputCarNames) {
+    public CarNameValidator(
+            final String inputCarNames
+    ) {
         INPUT_CAR_NAMES = inputCarNames;
         CAR_NAMES = new ArrayList<>(Arrays.asList(inputCarNames.split(DELIMITER)));
         isString();

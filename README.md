@@ -28,16 +28,17 @@
     - [x] 자동차 이름은 영어,숫자,한국어만 가능하다.
 
 
-- [ ] 경기 전체를 진행하는 Race 클래스 작성
-    - [ ] Race 생성자 : 자동차들 list 준비,
-    - [ ] 자동차 리스트 가져오기: `@getter` 처리
-    - [ ] Race runRound
+- [x] 경기 전체를 진행하는 RacingController 클래스 작성
+    - [x] 생성자 : InputView, OutputView
+    - [x] 자동차 리스트 입력, 시도 횟수 입력
+    - [x] 자동차 리스트 이동
+    - [x] 각 차수별 실행 결과 출력
 
 
-- [ ] InputView 구현
+- [x] InputView 구현
     - [x] 자동차 이름 입력
-    - [ ] 시도할 회수를 입력 받고 입력 값을 반환
-        - [ ] 숫자인 지 체크 후 NumberFormatException 발생 시 예외처리
+    - [x] 시도할 회수를 입력 받고 입력 값을 반환
+        - [x] 숫자인 지 체크 후 NumberFormatException 발생 시 예외처리
 
 
 - [ ] 경기를 출력하는 OutputView 구현

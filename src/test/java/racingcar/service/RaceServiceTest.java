@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
-import racingcar.domain.RaceResultResponse;
+import racingcar.domain.dto.RaceResultResponse;
 import racingcar.mock.MockNumberGenerator;
 
 import java.util.Arrays;

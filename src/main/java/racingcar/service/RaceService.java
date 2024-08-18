@@ -1,9 +1,9 @@
 package racingcar.service;
 
-import racingcar.domain.CarStatusResponse;
+import racingcar.domain.dto.CarStatusResponse;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
-import racingcar.domain.RaceResultResponse;
+import racingcar.domain.dto.RaceResultResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +25,7 @@ public class RaceService {
         return Race.of(tryCount);
     }
 
-    public List<RaceResultResponse> getRaceResult(
+    public List<RaceResultResponse>getRaceResult(
             final Cars cars,
             final int roundCount
     ) {

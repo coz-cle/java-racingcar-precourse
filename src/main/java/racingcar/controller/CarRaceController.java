@@ -1,14 +1,13 @@
 package racingcar.controller;
 
-import racingcar.validator.CarNameValidator;
 import racingcar.common.util.RandomNumberGenerator;
-import racingcar.validator.TryCountValidator;
-import racingcar.domain.CarStatusResponse;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
-import racingcar.domain.RaceResultResponse;
+import racingcar.domain.dto.RaceResultResponse;
 import racingcar.service.CarsService;
 import racingcar.service.RaceService;
+import racingcar.validator.CarNameValidator;
+import racingcar.validator.TryCountValidator;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 

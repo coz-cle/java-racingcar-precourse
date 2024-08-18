@@ -2,7 +2,7 @@ package racingcar.service;
 
 import racingcar.common.util.NumberGenerator;
 import racingcar.domain.Car;
-import racingcar.domain.CarStatusResponse;
+import racingcar.domain.dto.CarStatusResponse;
 import racingcar.domain.Cars;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package racingcar.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.domain.CarStatusResponse;
+import racingcar.domain.dto.CarStatusResponse;
 import racingcar.domain.Cars;
 import racingcar.mock.MockNumberGenerator;
 

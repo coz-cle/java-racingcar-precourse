@@ -14,9 +14,24 @@ public class CarList {
         for (int i = 0; i < split.length; i++) {
             String carName = split[i];
             CarValidator.validateLengthAndName(carName);
-            // TODO 구체화예정
             carList.add(new Car(carName));
         }
+    }
+
+    public void moveAll() {
+        carList.stream()
+                .forEach(Car::forward);
+    }
+
+    public void printLog() {
+        carList.stream()
+                .forEach(car -> {
+                    StringBuffer stringBuffer = new StringBuffer();
+                    for (int i = 0; i < car.getPosition(); i++) {
+                        stringBuffer.append("-");
+                    }
+                    System.out.printf("%s : %s%n", car.getName(), stringBuffer);
+                });
     }
 
 

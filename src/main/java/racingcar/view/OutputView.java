@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import racingcar.doamin.CarList;
+
 import static racingcar.utils.PrintMessage.*;
 
 public class OutputView {
@@ -16,11 +18,11 @@ public class OutputView {
         System.out.println(PRINT_RACING_RESULT.getMessage());
     }
 
-    public void printRacingLog() {
-
+    public void printRacingLog(CarList carList) {
+        carList.printLog();
     }
 
-    public void printWinner() {
+    public void printWinner(CarList carList) {
 
     }
 }

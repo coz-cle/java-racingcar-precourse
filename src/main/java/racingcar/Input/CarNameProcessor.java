@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class CarNameProcessor extends InputProcessor<List<String>> {
 	
+	public CarNameProcessor(ConsoleScanner consoleScanner) {
+		super(consoleScanner);
+	}
+	
 	@Override
 	List<String> validateInput(String input) {
 		List<String> names = Arrays.asList(input.split(","));

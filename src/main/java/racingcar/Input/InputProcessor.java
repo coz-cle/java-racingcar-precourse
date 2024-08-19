@@ -1,16 +1,20 @@
 package racingcar.Input;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public abstract class InputProcessor<T> {
 	private static final String EXCEPTION_MESSAGE_PREFIX = "[ERROR] ";
+	
+	private final ConsoleScanner consoleScanner;
+	
+	public InputProcessor(ConsoleScanner consoleScanner) {
+		this.consoleScanner = consoleScanner;
+	}
 	
 	public final T processInput(String message) {
 		T result;
 		while (true) {
 			try {
 				System.out.println(message);
-				result = validateInput(Console.readLine());
+				result = validateInput(consoleScanner.readLine());
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());

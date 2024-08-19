@@ -2,6 +2,10 @@ package racingcar.Input;
 
 public class TotalRoundProcessor extends InputProcessor<Integer> {
 	
+	public TotalRoundProcessor(ConsoleScanner consoleScanner) {
+		super(consoleScanner);
+	}
+	
 	@Override
 	Integer validateInput(String input) {
 		validateTotalRound(input);

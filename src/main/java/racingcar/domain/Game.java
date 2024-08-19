@@ -31,7 +31,7 @@ public class Game {
 		return this.results;
 	}
 	
-	private boolean isRunning() {
+	public boolean isRunning() {
 		return this.totalRound < this.results.size();
 	}
 	

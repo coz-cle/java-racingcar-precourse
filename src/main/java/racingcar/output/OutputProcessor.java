@@ -2,15 +2,13 @@ package racingcar.output;
 
 import racingcar.running.Round;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class OutputProcessor {
 	private static final String POSITION_COUNT_UNIT = "-";
 	
 	private final List<Round> gameResults;
+	private final Queue<Round.CarResult> queue = new LinkedList<>();
 	private int highPosition = 0;
 	
 	public OutputProcessor(List<Round> gameResults) {
@@ -18,14 +16,14 @@ public class OutputProcessor {
 	}
 	
 	/* 실행 결과 출력값 추출 */
-	public String expectedRoundResultOutput(Queue<Round.CarResult> queue) {
-		String result = null;
+	public List<String> expectedRoundResult() {
+		List<String> result = new ArrayList<>();
 		for (Round round : this.gameResults) {
 			StringBuilder builder = new StringBuilder();
-			queue.addAll(round.getCarResults());
+			this.queue.addAll(round.getCarResults());
 			
-			while (!queue.isEmpty()) {
-				Round.CarResult carResult = queue.poll();
+			while (!this.queue.isEmpty()) {
+				Round.CarResult carResult = this.queue.poll();
 				int position = carResult.getPosition();
 				if (isHighPosition(position)) {
 					updateHighPosition(position);
@@ -40,13 +38,13 @@ public class OutputProcessor {
 				builder.append("\n");
 			}
 			
-			result = builder.toString();
+			result.add(builder.toString());
 		}
 		return result;
 	}
 	
 	/* 우승자 출력값 추출 */
-	public String expectedWinnerNamesOutput() {
+	public String expectedWinnerNames() {
 		// 우승자 조회
 		Set<String> winnerNames = new HashSet<>();
 		Round lastRound = getLastRound();

@@ -7,12 +7,7 @@ import java.util.List;
 
 public class Round {
 	
-	private final int roundNo;
 	private final List<CarResult> carResults = new ArrayList<>();
-	
-	public Round(int roundNo) {
-		this.roundNo = roundNo;
-	}
 	
 	public void createResult(List<Car> cars) {
 		for (Car car : cars) {
@@ -21,11 +16,14 @@ public class Round {
 		}
 	}
 	
+	public List<CarResult> getCarResults() {
+		return carResults;
+	}
+	
 	@Override
 	public String toString() {
 		return "Round{" +
-				"roundNo=" + roundNo +
-				", carResults=" + carResults +
+				"carResults=" + carResults +
 				'}';
 	}
 	
@@ -36,6 +34,14 @@ public class Round {
 		public CarResult(String name, int position) {
 			this.name = name;
 			this.position = position;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public int getPosition() {
+			return position;
 		}
 		
 		@Override

@@ -21,8 +21,7 @@ public class Game {
 		while (count > 0) {
 			startRacing();
 			count--;
-			int thisRound = this.totalRound - count;
-			writeResult(thisRound, this.cars);
+			writeResult(this.cars);
 		}
 	}
 	
@@ -50,8 +49,8 @@ public class Game {
 		return pickNumber >= 4;
 	}
 	
-	private void writeResult(int thisRound, List<Car> cars) {
-		Round round = new Round(thisRound);
+	private void writeResult(List<Car> cars) {
+		Round round = new Round();
 		round.createResult(cars);
 		addResults(round);
 	}

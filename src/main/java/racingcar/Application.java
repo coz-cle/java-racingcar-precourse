@@ -2,13 +2,18 @@ package racingcar;
 
 import racingcar.Input.CarNameProcessor;
 import racingcar.Input.TotalRoundProcessor;
+import racingcar.output.OutputProcessor;
+import racingcar.running.Round;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Application {
 	private static final String CAR_NAME_INPUT_MESSAGE = "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)";
 	private static final String TOTAL_ROUND_INPUT_MESSAGE = "시도할 횟수는 몇회인가요?";
+	private static final String POSITION_COUNT_UNIT = "-";
 	
 	public static void main(String[] args) {
 		
@@ -17,11 +22,12 @@ public class Application {
 		
 		// 경주 실행
 		initGame.run();
-		System.out.println("initGame.getResultList():" + initGame.getResults());
+		List<Round> gameResults = initGame.getResults();
 		
 		// 경주 완료
-		
+		finish(gameResults);
 	}
+	
 	
 	private static Game initialize() {
 		
@@ -42,5 +48,22 @@ public class Application {
 			cars.add(new Car(carName));
 		}
 		return cars;
+	}
+	
+	private static void finish(List<Round> gameResults) {
+		List<String> outputs = new ArrayList<>();
+		Queue<Round.CarResult> carResultQueue = new LinkedList<>();
+		OutputProcessor outputProcessor = new OutputProcessor(gameResults);
+		
+		outputs.add("실행 결과");
+		String roundResult = outputProcessor.expectedRoundResultOutput(carResultQueue);
+		outputs.add(roundResult);
+		
+		String winnerNames = outputProcessor.expectedWinnerNamesOutput();
+		outputs.add("최종 우승자 : " + winnerNames);
+		
+		for (String output : outputs) {
+			System.out.println(output);
+		}
 	}
 }

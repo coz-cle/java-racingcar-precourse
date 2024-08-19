@@ -1,5 +1,7 @@
 package racingcar.Input;
 
+import racingcar.utils.ConsoleScanner;
+
 public abstract class InputProcessor<T> {
 	private static final String EXCEPTION_MESSAGE_PREFIX = "[ERROR] ";
 	

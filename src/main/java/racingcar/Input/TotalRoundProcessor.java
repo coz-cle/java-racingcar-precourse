@@ -1,5 +1,7 @@
 package racingcar.Input;
 
+import racingcar.utils.ConsoleScanner;
+
 public class TotalRoundProcessor extends InputProcessor<Integer> {
 	
 	public TotalRoundProcessor(ConsoleScanner consoleScanner) {

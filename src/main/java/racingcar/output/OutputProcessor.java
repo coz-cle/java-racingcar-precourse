@@ -1,6 +1,6 @@
 package racingcar.output;
 
-import racingcar.running.Round;
+import racingcar.domain.Round;
 
 import java.util.*;
 

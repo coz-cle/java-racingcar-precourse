@@ -8,6 +8,8 @@ import racingcar.domain.Round;
 import racingcar.output.OutputProcessor;
 import racingcar.utils.ConsoleInputScanner;
 import racingcar.utils.InputScanner;
+import racingcar.utils.NumberGenerator;
+import racingcar.utils.RandomNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class CarRacingService {
 	
 	public Game initialize() {
 		final InputScanner inputScanner = new ConsoleInputScanner();
+		
 		CarNameProcessor carNameProcessor = new CarNameProcessor(inputScanner);
 		System.out.println(CAR_NAME_INPUT_MESSAGE);
 		List<String> carNames = carNameProcessor.process();
@@ -30,15 +33,8 @@ public class CarRacingService {
 		
 		List<Car> cars = createCars(carNames);
 		
-		return new Game(cars, totalRound);
-	}
-	
-	public List<Car> createCars(List<String> carNames) {
-		List<Car> cars = new ArrayList<>();
-		for (String carName : carNames) {
-			cars.add(new Car(carName));
-		}
-		return cars;
+		final NumberGenerator numberGenerator = new RandomNumberGenerator();
+		return new Game(cars, totalRound, numberGenerator);
 	}
 	
 	public void finish(List<Round> gameResults) {
@@ -49,11 +45,19 @@ public class CarRacingService {
 		List<String> roundResults = outputProcessor.expectedRoundResult();
 		outputs.addAll(roundResults);
 		
-		String winnerNames = outputProcessor.expectedWinnerNames();
+		final String winnerNames = outputProcessor.expectedWinnerNames();
 		outputs.add(FINAL_WINNER_OUTPUT_PREFIX + winnerNames);
 		
 		for (String output : outputs) {
 			System.out.println(output);
 		}
+	}
+	
+	private List<Car> createCars(List<String> carNames) {
+		List<Car> cars = new ArrayList<>();
+		for (String carName : carNames) {
+			cars.add(new Car(carName));
+		}
+		return cars;
 	}
 }

@@ -1,6 +1,6 @@
 package racingcar.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.utils.NumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,13 @@ import java.util.List;
 public class Game {
 	private final List<Car> cars;
 	private final int totalRound;
+	private final NumberGenerator numberGenerator;
 	private final List<Round> results = new ArrayList<>();
 	
-	public Game(List<Car> cars, int totalRound) {
+	public Game(List<Car> cars, int totalRound, NumberGenerator numberGenerator) {
 		this.cars = cars;
 		this.totalRound = totalRound;
+		this.numberGenerator = numberGenerator;
 	}
 	
 	public final void run() {
@@ -20,7 +22,7 @@ public class Game {
 		while (count > 0) {
 			startRacing();
 			count--;
-			writeResult(this.cars);
+			writeResult();
 		}
 	}
 	
@@ -36,8 +38,8 @@ public class Game {
 	}
 	
 	private void startRacing() {
-		cars.forEach(car -> {
-			int pickNumber = Randoms.pickNumberInRange(1, 9);
+		this.cars.forEach(car -> {
+			int pickNumber = numberGenerator.pickNumberInRange(1, 9);
 			if (isGo(pickNumber)) {
 				car.addPosition();
 			}
@@ -48,9 +50,9 @@ public class Game {
 		return pickNumber >= 4;
 	}
 	
-	private void writeResult(List<Car> cars) {
+	private void writeResult() {
 		Round round = new Round();
-		round.createResult(cars);
+		round.createResult(this.cars);
 		addResults(round);
 	}
 	

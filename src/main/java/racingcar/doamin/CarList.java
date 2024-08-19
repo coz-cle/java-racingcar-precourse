@@ -14,6 +14,11 @@ public class CarList {
 
     List<Car> carList = new ArrayList<>();
 
+    /**
+     * 사용자가 입력한 자동차명을 기준으로 CarList 객체에 담음
+     *
+     * @param carNames
+     */
     public void add(String carNames) {
         String[] split = carNames.split(",");
         for (int i = 0; i < split.length; i++) {
@@ -23,11 +28,17 @@ public class CarList {
         }
     }
 
+    /**
+     * carList에 담긴 모든 자동차 이동
+     */
     public void moveAll() {
         carList.stream()
                 .forEach(Car::forward);
     }
 
+    /**
+     * 경기 진행 과정을 출력
+     */
     public void printLog() {
         carList.stream()
                 .forEach(car -> {
@@ -38,6 +49,10 @@ public class CarList {
                     System.out.printf("%s : %s%n", car.getName(), stringBuffer);
                 });
     }
+
+    /**
+     * 우승자를 출력
+     */
 
     public void printWinner() {
         List<Car> winners = carList.stream()

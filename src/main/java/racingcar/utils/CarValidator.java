@@ -18,16 +18,26 @@ public final class CarValidator {
         validateCarName(carName);
     }
 
-    public static void validateLength(String name) {
-        int length = name.length();
+    /**
+     * 자동차 이름에 대한 글자수 검사
+     *
+     * @param carName
+     */
+    public static void validateLength(String carName) {
+        int length = carName.length();
         if (length > Consts.MAX_CAR_NAME_LENGTH) {
             throw new IllegalArgumentException(INVALID_LENGTH.getMessage());
         }
-        if (StringUtils.isBlank(name)) {
+        if (StringUtils.isBlank(carName)) {
             throw new IllegalArgumentException(INVALID_LENGTH.getMessage());
         }
     }
 
+    /**
+     * 자동차 이름에 대한 유효성 검사
+     *
+     * @param carName
+     */
     public static void validateCarName(String carName) {
         boolean matches = Pattern.matches("^[a-zA-Z0-9가-힣]+$", carName);
         if (!matches) {

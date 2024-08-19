@@ -23,6 +23,6 @@ public class OutputView {
     }
 
     public void printWinner(CarList carList) {
-
+        carList.printWinner();
     }
 }

@@ -21,17 +21,21 @@ public class RacingController {
 
         outputView.printInputTryCount();
         int tryCount = inputView.inputTryCount();
-        outputView.printRacingStart();
-        moveAllCar(cars, tryCount);
 
-        // TODO 우승자 출력
+        moveAllCar(cars, tryCount);
+        findWinner(cars);
     }
 
     private void moveAllCar(CarList cars, int tryCount) {
+        outputView.printRacingStart();
         IntStream.range(0, tryCount).forEach(index -> {
             cars.moveAll();
             outputView.printRacingLog(cars);
         });
+    }
+
+    private void findWinner(CarList cars) {
+        outputView.printWinner(cars);
     }
 
 }

@@ -6,13 +6,13 @@ import racingcar.domain.Car;
 import racingcar.domain.Game;
 import racingcar.domain.Round;
 import racingcar.output.OutputProcessor;
-import racingcar.utils.ConsoleScanner;
-import racingcar.utils.ConsoleScannerImpl;
+import racingcar.utils.ConsoleInputScanner;
+import racingcar.utils.InputScanner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RacingGameService {
+public class CarRacingService {
 	private static final String CAR_NAME_INPUT_MESSAGE = "경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)";
 	private static final String TOTAL_ROUND_INPUT_MESSAGE = "시도할 횟수는 몇회인가요?";
 	private static final String RUNNING_RESULT_OUTPUT_TITLE = "실행 결과";
@@ -22,9 +22,12 @@ public class RacingGameService {
 		final ConsoleScanner consoleScanner = new ConsoleScannerImpl();
 		CarNameProcessor carNameProcessor = new CarNameProcessor(consoleScanner);
 		List<String> carNames = carNameProcessor.processInput(CAR_NAME_INPUT_MESSAGE);
+		final InputScanner inputScanner = new ConsoleInputScanner();
+		CarNameProcessor carNameProcessor = new CarNameProcessor(inputScanner);
 		
 		TotalRoundProcessor totalRoundProcessor = new TotalRoundProcessor(consoleScanner);
 		Integer totalRound = totalRoundProcessor.processInput(TOTAL_ROUND_INPUT_MESSAGE);
+		TotalRoundProcessor totalRoundProcessor = new TotalRoundProcessor(inputScanner);
 		
 		List<Car> cars = createCars(carNames);
 		

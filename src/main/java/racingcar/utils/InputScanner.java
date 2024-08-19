@@ -1,6 +1,6 @@
 package racingcar.utils;
 
-public interface ConsoleScanner {
+public interface InputScanner {
 	
 	String readLine();
 }

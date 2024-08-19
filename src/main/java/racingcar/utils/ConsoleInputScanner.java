@@ -2,7 +2,7 @@ package racingcar.utils;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class ConsoleScannerImpl implements ConsoleScanner {
+public class ConsoleInputScanner implements InputScanner {
 	
 	@Override
 	public String readLine() {

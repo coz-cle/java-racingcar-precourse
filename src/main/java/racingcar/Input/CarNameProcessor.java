@@ -1,6 +1,6 @@
 package racingcar.Input;
 
-import racingcar.utils.ConsoleScanner;
+import racingcar.utils.InputScanner;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,8 +9,8 @@ import java.util.Set;
 
 public class CarNameProcessor extends InputProcessor<List<String>> {
 	
-	public CarNameProcessor(ConsoleScanner consoleScanner) {
-		super(consoleScanner);
+	public CarNameProcessor(InputScanner inputScanner) {
+		super(inputScanner);
 	}
 	
 	@Override

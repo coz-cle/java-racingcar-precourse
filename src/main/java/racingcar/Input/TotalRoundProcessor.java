@@ -1,11 +1,11 @@
 package racingcar.Input;
 
-import racingcar.utils.ConsoleScanner;
+import racingcar.utils.InputScanner;
 
 public class TotalRoundProcessor extends InputProcessor<Integer> {
 	
-	public TotalRoundProcessor(ConsoleScanner consoleScanner) {
-		super(consoleScanner);
+	public TotalRoundProcessor(InputScanner inputScanner) {
+		super(inputScanner);
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ public abstract class InputProcessor<T> {
 		this.inputScanner = inputScanner;
 	}
 	
-	public final T processInput(String message) {
+	public final T process() {
 		T result;
 		while (true) {
 			try {

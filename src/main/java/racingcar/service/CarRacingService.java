@@ -19,15 +19,14 @@ public class CarRacingService {
 	private static final String FINAL_WINNER_OUTPUT_PREFIX = "최종 우승자 : ";
 	
 	public Game initialize() {
-		final ConsoleScanner consoleScanner = new ConsoleScannerImpl();
-		CarNameProcessor carNameProcessor = new CarNameProcessor(consoleScanner);
-		List<String> carNames = carNameProcessor.processInput(CAR_NAME_INPUT_MESSAGE);
 		final InputScanner inputScanner = new ConsoleInputScanner();
 		CarNameProcessor carNameProcessor = new CarNameProcessor(inputScanner);
+		System.out.println(CAR_NAME_INPUT_MESSAGE);
+		List<String> carNames = carNameProcessor.process();
 		
-		TotalRoundProcessor totalRoundProcessor = new TotalRoundProcessor(consoleScanner);
-		Integer totalRound = totalRoundProcessor.processInput(TOTAL_ROUND_INPUT_MESSAGE);
 		TotalRoundProcessor totalRoundProcessor = new TotalRoundProcessor(inputScanner);
+		System.out.println(TOTAL_ROUND_INPUT_MESSAGE);
+		Integer totalRound = totalRoundProcessor.process();
 		
 		List<Car> cars = createCars(carNames);
 		

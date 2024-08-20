@@ -9,7 +9,7 @@ public class Game {
 	private final List<Car> cars;
 	private final int totalRound;
 	private final NumberGenerator numberGenerator;
-	private final List<Round> results = new ArrayList<>();
+	private final List<Round> rounds = new ArrayList<>();
 	
 	public Game(List<Car> cars, int totalRound, NumberGenerator numberGenerator) {
 		this.cars = cars;
@@ -26,18 +26,18 @@ public class Game {
 		}
 	}
 	
-	public List<Round> getResults() {
+	public List<Round> getRounds() {
 		if (isRunning()) {
 			throw new IllegalStateException("게임을 진행중이다.");
 		}
-		return this.results;
+		return this.rounds;
 	}
 	
 	public boolean isRunning() {
-		return this.totalRound < this.results.size();
+		return this.totalRound < this.rounds.size();
 	}
 	
-	private void startRacing() {
+	public void startRacing() {
 		this.cars.forEach(car -> {
 			int pickNumber = numberGenerator.pickNumberInRange(1, 9);
 			if (isGo(pickNumber)) {
@@ -50,14 +50,14 @@ public class Game {
 		return pickNumber >= 4;
 	}
 	
-	private void writeResult() {
+	public void writeResult() {
 		Round round = new Round();
 		round.createResult(this.cars);
 		addResults(round);
 	}
 	
 	private void addResults(Round round) {
-		this.results.add(round);
+		this.rounds.add(round);
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class Game {
 		return "Game{" +
 				"cars=" + cars +
 				", totalRound=" + totalRound +
-				", results=" + results +
+				", results=" + rounds +
 				'}';
 	}
 }

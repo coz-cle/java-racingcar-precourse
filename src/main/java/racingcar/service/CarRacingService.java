@@ -20,7 +20,7 @@ public class CarRacingService {
 	private static final String RUNNING_RESULT_OUTPUT_TITLE = "실행 결과";
 	private static final String FINAL_WINNER_OUTPUT_PREFIX = "최종 우승자 : ";
 	
-	/* 경기 준비 */
+	/* 경주 준비 */
 	public Game initialize() {
 		final InputScanner inputScanner = new ConsoleInputScanner();
 		
@@ -38,7 +38,19 @@ public class CarRacingService {
 		return new Game(cars, totalRound, numberGenerator);
 	}
 	
-	/* 경기 종료 */
+	/* 경주 실행 */
+	public List<Round> race(Game game) {
+		
+		game.run();
+		
+		List<Round> rounds = new ArrayList<>();
+		if (!game.isRunning()) {
+			rounds = game.getRounds();
+		}
+		return rounds;
+	}
+	
+	/* 경주 완료 */
 	public void finish(List<Round> gameResults) {
 		List<String> outputs = new ArrayList<>();
 		OutputProcessor outputProcessor = new OutputProcessor(gameResults);

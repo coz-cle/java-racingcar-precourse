@@ -7,7 +7,7 @@ public class Round {
 	
 	private final List<CarResult> carResults = new ArrayList<>();
 	
-	public void createResult(List<Car> cars) {
+	public void createCarResults(List<Car> cars) {
 		for (Car car : cars) {
 			CarResult carResult = new CarResult(car.getName(), car.getPosition());
 			carResults.add(carResult);

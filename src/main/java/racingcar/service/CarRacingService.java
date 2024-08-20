@@ -43,11 +43,11 @@ public class CarRacingService {
 		
 		game.run();
 		
-		List<Round> rounds = new ArrayList<>();
-		if (!game.isRunning()) {
-			rounds = game.getRounds();
+		if (game.isRunning()) {
+			throw new IllegalStateException("게임을 진행중이다.");
 		}
-		return rounds;
+		
+		return game.getRounds();
 	}
 	
 	/* 경주 완료 */

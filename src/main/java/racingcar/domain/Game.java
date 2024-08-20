@@ -27,9 +27,6 @@ public class Game {
 	}
 	
 	public List<Round> getRounds() {
-		if (isRunning()) {
-			throw new IllegalStateException("게임을 진행중이다.");
-		}
 		return this.rounds;
 	}
 	
@@ -52,7 +49,7 @@ public class Game {
 	
 	public void writeResult() {
 		Round round = new Round();
-		round.createResult(this.cars);
+		round.createCarResults(this.cars);
 		addResults(round);
 	}
 	

@@ -5,7 +5,9 @@ import racingcar.domain.Round;
 import java.util.*;
 
 public class OutputProcessor {
-	private static final String POSITION_COUNT_UNIT = "-";
+	private static final String POSITION_FORMATTING_UNIT = "-";
+	private static final String RESULT_CONNECTION_STRING = " : ";
+	private static final String NEW_LINE = "\n";
 	
 	private final List<Round> gameResults;
 	private int highPosition = 0;
@@ -59,12 +61,12 @@ public class OutputProcessor {
 		}
 		
 		builder.append(carResult.getName());
-		builder.append(" : ");
+		builder.append(RESULT_CONNECTION_STRING);
 		while (position > 0) {
-			builder.append(POSITION_COUNT_UNIT);
+			builder.append(POSITION_FORMATTING_UNIT);
 			position--;
 		}
-		builder.append("\n");
+		builder.append(NEW_LINE);
 	}
 	
 	private void updateHighPosition(int position) {

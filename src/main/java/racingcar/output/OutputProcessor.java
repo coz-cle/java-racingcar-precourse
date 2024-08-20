@@ -8,7 +8,6 @@ public class OutputProcessor {
 	private static final String POSITION_COUNT_UNIT = "-";
 	
 	private final List<Round> gameResults;
-	private final Queue<Round.CarResult> queue = new LinkedList<>();
 	private int highPosition = 0;
 	
 	public OutputProcessor(List<Round> gameResults) {
@@ -16,31 +15,13 @@ public class OutputProcessor {
 	}
 	
 	/* 실행 결과 출력값 추출 */
-	public List<String> expectedRoundResult() {
-		List<String> result = new ArrayList<>();
+	public List<String> extreactTotalRoundResult() {
+		List<String> resultList = new ArrayList<>();
 		for (Round round : this.gameResults) {
-			StringBuilder builder = new StringBuilder();
-			this.queue.addAll(round.getCarResults());
-			
-			while (!this.queue.isEmpty()) {
-				Round.CarResult carResult = this.queue.poll();
-				int position = carResult.getPosition();
-				if (isHighPosition(position)) {
-					updateHighPosition(position);
-				}
-				
-				builder.append(carResult.getName());
-				builder.append(" : ");
-				while (position > 0) {
-					builder.append(POSITION_COUNT_UNIT);
-					position--;
-				}
-				builder.append("\n");
-			}
-			
-			result.add(builder.toString());
+			String resultRound = extractRoundResult(round);
+			resultList.add(resultRound);
 		}
-		return result;
+		return resultList;
 	}
 	
 	/* 우승자 출력값 추출 */
@@ -57,6 +38,33 @@ public class OutputProcessor {
 		// 우승자 출력값 생성
 		String[] winnerNamesArray = winnerNames.toArray(new String[0]);
 		return String.join(", ", winnerNamesArray);
+	}
+	
+	/* 라운드별 결과 추출 */
+	private String extractRoundResult(Round round) {
+		StringBuilder builder = new StringBuilder();
+		
+		round.getCarResults().stream()
+				.filter(Objects::nonNull)
+				.forEach(carResult -> formatCarResult(carResult, builder));
+		
+		return builder.toString();
+	}
+	
+	/* 자동차 전진 결과 포맷팅 */
+	private void formatCarResult(Round.CarResult carResult, StringBuilder builder) {
+		int position = carResult.getPosition();
+		if (isHighPosition(position)) {
+			updateHighPosition(position);
+		}
+		
+		builder.append(carResult.getName());
+		builder.append(" : ");
+		while (position > 0) {
+			builder.append(POSITION_COUNT_UNIT);
+			position--;
+		}
+		builder.append("\n");
 	}
 	
 	private void updateHighPosition(int position) {

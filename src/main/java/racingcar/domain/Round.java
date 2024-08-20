@@ -35,11 +35,11 @@ public class Round {
 		}
 		
 		public String getName() {
-			return name;
+			return this.name;
 		}
 		
 		public int getPosition() {
-			return position;
+			return this.position;
 		}
 		
 		@Override

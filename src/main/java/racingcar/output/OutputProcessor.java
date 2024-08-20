@@ -8,6 +8,8 @@ public class OutputProcessor {
 	private static final String POSITION_FORMATTING_UNIT = "-";
 	private static final String RESULT_CONNECTION_STRING = " : ";
 	private static final String NEW_LINE = "\n";
+	private static final String WINNER_NAMES_SEPARATOR = ", ";
+	
 	
 	private final List<Round> gameResults;
 	private int highPosition = 0;
@@ -39,7 +41,7 @@ public class OutputProcessor {
 		
 		// 우승자 출력값 생성
 		String[] winnerNamesArray = winnerNames.toArray(new String[0]);
-		return String.join(", ", winnerNamesArray);
+		return String.join(WINNER_NAMES_SEPARATOR, winnerNamesArray);
 	}
 	
 	/* 라운드별 결과 추출 */

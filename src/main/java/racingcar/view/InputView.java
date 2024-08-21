@@ -2,30 +2,35 @@ package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.doamin.CarList;
-
-import java.util.regex.Pattern;
+import racingcar.utils.TryCountValidator;
 
 import static racingcar.utils.ErrorMessage.INVALID_TRY_COUNT;
 
 public class InputView {
 
     public CarList inputCarName() {
-        String carNames = Console.readLine();
-        CarList carList = new CarList();
-        carList.add(carNames);
-        return carList;
+        while (true) {
+            try {
+                String carNames = Console.readLine();
+                CarList carList = new CarList();
+                carList.add(carNames);
+                return carList;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
     }
 
     public int inputTryCount() {
-        String tryCount = Console.readLine();
-
-        boolean matches = Pattern.matches("^[0-9]+$", tryCount);
-        if (!matches) {
-            throw new IllegalArgumentException(INVALID_TRY_COUNT.getMessage());
+        while (true) {
+            String tryCount = Console.readLine();
+            if (TryCountValidator.isValidTryCount(tryCount)) {
+                return Integer.parseInt(tryCount);
+            } else {
+                System.out.println(INVALID_TRY_COUNT.getMessage());
+            }
         }
-
-        return Integer.parseInt(tryCount);
     }
-
 
 }

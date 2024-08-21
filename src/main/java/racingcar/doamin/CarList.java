@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import static racingcar.utils.PrintMessage.PRINT_WINNER;
+import static racingcar.utils.PrintMessage.*;
 
 public class CarList {
 
@@ -20,7 +20,7 @@ public class CarList {
      * @param carNames
      */
     public void add(String carNames) {
-        String[] split = carNames.split(",");
+        String[] split = carNames.split(CARS_SEPARATOR.getMessage());
         for (int i = 0; i < split.length; i++) {
             String carName = split[i];
             CarValidator.validateLengthAndName(carName);
@@ -57,15 +57,15 @@ public class CarList {
     public void printWinner() {
         List<Car> winners = carList.stream()
                 .max(Comparator.comparing(Car::getPosition))
-                .map(car -> carList.stream()
-                        .filter(c -> c.getPosition() == car.getPosition())
+                .map(winningCar -> carList.stream()
+                        .filter(car -> car.getPosition() == winningCar.getPosition())
                         .collect(Collectors.toList())
                 )
                 .orElseThrow(NoSuchElementException::new);
 
         String winnerNames = winners.stream()
                 .map(Car::getName)
-                .collect(Collectors.joining(","));
+                .collect(Collectors.joining(WINNER_SEPARATOR.getMessage()));
 
         System.out.println(PRINT_WINNER.getMessage() + winnerNames);
 

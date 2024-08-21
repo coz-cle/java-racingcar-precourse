@@ -4,8 +4,7 @@ import org.junit.platform.commons.util.StringUtils;
 
 import java.util.regex.Pattern;
 
-import static racingcar.utils.ErrorMessage.INVALID_CAR_NAME;
-import static racingcar.utils.ErrorMessage.INVALID_LENGTH;
+import static racingcar.utils.ErrorMessage.*;
 
 public final class CarValidator {
 
@@ -24,11 +23,11 @@ public final class CarValidator {
      * @param carName
      */
     public static void validateLength(String carName) {
-        int length = carName.length();
-        if (length > Consts.MAX_CAR_NAME_LENGTH) {
-            throw new IllegalArgumentException(INVALID_LENGTH.getMessage());
-        }
         if (StringUtils.isBlank(carName)) {
+            throw new IllegalArgumentException(INVALID_EMPTY.getMessage());
+        }
+
+        if (carName.length() > Consts.MAX_CAR_NAME_LENGTH) {
             throw new IllegalArgumentException(INVALID_LENGTH.getMessage());
         }
     }

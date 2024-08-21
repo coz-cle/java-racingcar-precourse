@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
+	private static final int PICK_RANGE_MIN = 1;
+	private static final int PICK_RANGE_MAX = 9;
+	
 	private final List<Car> cars;
 	private final int totalRound;
 	private final NumberGenerator numberGenerator;
@@ -36,7 +39,7 @@ public class Game {
 	
 	public void startRacing() {
 		this.cars.forEach(car -> {
-			int pickNumber = numberGenerator.pickNumberInRange(1, 9);
+			int pickNumber = numberGenerator.pickNumberInRange(PICK_RANGE_MIN, PICK_RANGE_MAX);
 			if (isGo(pickNumber)) {
 				car.addPosition();
 			}

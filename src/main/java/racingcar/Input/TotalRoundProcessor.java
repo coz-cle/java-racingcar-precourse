@@ -1,5 +1,6 @@
 package racingcar.Input;
 
+import org.junit.platform.commons.util.StringUtils;
 import racingcar.utils.InputScanner;
 
 public class TotalRoundProcessor extends InputProcessor<Integer> {
@@ -7,6 +8,7 @@ public class TotalRoundProcessor extends InputProcessor<Integer> {
 	private final static String TOTAL_ROUND_REQUIRED_MESSAGE = "시도할 횟수는 반드시 입력되어야 한다.";
 	private final static String TOTAL_ROUND_ONLY_NUMBER_MESSAGE = "시도할 횟수는 숫자만 입력되어야 한다.";
 	private final static String TOTAL_ROUND_MINIMUM_MESSAGE = "시도할 횟수는 1 이상이여야 한다.";
+	private final static int TOTAL_ROUND_MIN = 1;
 	
 	public TotalRoundProcessor(InputScanner inputScanner) {
 		super(inputScanner);
@@ -14,23 +16,24 @@ public class TotalRoundProcessor extends InputProcessor<Integer> {
 	
 	@Override
 	Integer validateInput(String input) {
-		validateTotalRound(input);
+		if (StringUtils.isBlank(input)) {
+			throwException(TOTAL_ROUND_REQUIRED_MESSAGE);
+		}
 		return convertStringToInt(input);
 	}
 	
-	private void validateTotalRound(String inputValue) {
-		if (inputValue == null || inputValue.trim().isEmpty()) {
-			throwException(TOTAL_ROUND_REQUIRED_MESSAGE);
-		}
+	private int convertStringToInt(String inputValue) {
 		
 		if (!isConvertibleToInt(inputValue)) {
 			throwException(TOTAL_ROUND_ONLY_NUMBER_MESSAGE);
 		}
 		
-		final int totalRound = convertStringToInt(inputValue);
-		if (totalRound < 1) {
+		final int totalRound = Integer.parseInt(inputValue);
+		if (totalRound < TOTAL_ROUND_MIN) {
 			throwException(TOTAL_ROUND_MINIMUM_MESSAGE);
 		}
+		
+		return totalRound;
 	}
 	
 	private boolean isConvertibleToInt(String inputValue) {
@@ -40,9 +43,5 @@ public class TotalRoundProcessor extends InputProcessor<Integer> {
 		} catch (NumberFormatException e) {
 			return false;
 		}
-	}
-	
-	private int convertStringToInt(String inputValue) {
-		return Integer.parseInt(inputValue);
 	}
 }

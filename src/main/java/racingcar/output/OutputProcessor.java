@@ -19,7 +19,7 @@ public class OutputProcessor {
 	}
 	
 	/* 실행 결과 출력값 추출 */
-	public List<String> extreactTotalRoundResult() {
+	public List<String> extractTotalRoundResult() {
 		List<String> resultList = new ArrayList<>();
 		for (Round round : this.gameResults) {
 			String resultRound = extractRoundResult(round);
@@ -29,7 +29,7 @@ public class OutputProcessor {
 	}
 	
 	/* 우승자 출력값 추출 */
-	public String expectedWinnerNames() {
+	public String extractWinnerNames() {
 		// 우승자 조회
 		Set<String> winnerNames = new HashSet<>();
 		Round lastRound = getLastRound();

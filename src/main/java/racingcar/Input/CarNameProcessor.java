@@ -1,11 +1,9 @@
 package racingcar.Input;
 
+import org.junit.platform.commons.util.StringUtils;
 import racingcar.utils.InputScanner;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CarNameProcessor extends InputProcessor<List<String>> {
 	
@@ -13,8 +11,10 @@ public class CarNameProcessor extends InputProcessor<List<String>> {
 	private static final String REQUIRED_MESSAGE = "자동차의 이름은 하나라도 입력되어야 한다.";
 	private static final String NON_DUPLICATE_MESSAGE = "자동차의 이름은 중복되지 않아야 한다.";
 	private static final String NOT_EMPTY_MESSAGE = "자동차의 이름은 공백이 아니여야 한다.";
-	private static final String NOT_BLANK_MESSAGE = "자동차의 이름에는 공백이 없어야 한다.";
+	private static final String NOT_SPACE_IN_NAME_MESSAGE = "자동차의 이름에는 공백이 없어야 한다.";
 	private static final String LIMITS_MESSAGE = "자동차의 이름은 5자 이하여야 한다.";
+	private static final String SPACE = " ";
+	private static final int NAME_MAX_LENGTH = 5;
 	
 	
 	public CarNameProcessor(InputScanner inputScanner) {
@@ -33,7 +33,7 @@ public class CarNameProcessor extends InputProcessor<List<String>> {
 	}
 	
 	private void validateCarNames(List<String> names) {
-		if (names == null || names.isEmpty()) {
+		if (Objects.isNull(names) || names.isEmpty()) {
 			super.throwException(REQUIRED_MESSAGE);
 		}
 		
@@ -45,18 +45,16 @@ public class CarNameProcessor extends InputProcessor<List<String>> {
 	
 	private void validateCarName(String name) {
 		
-		if (name == null || name.isEmpty()) {
+		if (StringUtils.isBlank(name)) {
 			super.throwException(NOT_EMPTY_MESSAGE);
 		}
 		
-		if (name.contains(" ")) {
-			super.throwException(NOT_BLANK_MESSAGE);
+		if (name.contains(SPACE)) {
+			super.throwException(NOT_SPACE_IN_NAME_MESSAGE);
 		}
 		
-		if (name.length() > 5) {
+		if (name.length() > NAME_MAX_LENGTH) {
 			super.throwException(LIMITS_MESSAGE);
 		}
-		
-		
 	}
 }

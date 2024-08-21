@@ -1,5 +1,6 @@
 package racingcar;
 
+import racingcar.config.AppConfig;
 import racingcar.domain.Game;
 import racingcar.domain.Round;
 import racingcar.service.CarRacingService;
@@ -8,9 +9,9 @@ import java.util.List;
 
 public class Application {
 	
-	private static final CarRacingService carRacingService = new CarRacingService();
-	
 	public static void main(String[] args) {
+		AppConfig appConfig = new AppConfig();
+		CarRacingService carRacingService = appConfig.carRacingService();
 		
 		// 경주 준비
 		Game initGame = carRacingService.initialize();

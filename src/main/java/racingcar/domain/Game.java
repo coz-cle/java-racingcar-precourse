@@ -49,11 +49,14 @@ public class Game {
 	
 	public void writeResult() {
 		Round round = new Round();
-		round.createCarResults(this.cars);
-		addResults(round);
+		for (Car car : cars) {
+			round.createCarResults(car.getName(), car.getPosition());
+		}
+		
+		addRounds(round);
 	}
 	
-	private void addResults(Round round) {
+	private void addRounds(Round round) {
 		this.rounds.add(round);
 	}
 	

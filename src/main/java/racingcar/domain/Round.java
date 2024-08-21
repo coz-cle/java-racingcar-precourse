@@ -7,11 +7,9 @@ public class Round {
 	
 	private final List<CarResult> carResults = new ArrayList<>();
 	
-	public void createCarResults(List<Car> cars) {
-		for (Car car : cars) {
-			CarResult carResult = new CarResult(car.getName(), car.getPosition());
-			carResults.add(carResult);
-		}
+	public void createCarResults(String carName, int position) {
+		CarResult carResult = new CarResult(carName, position);
+		carResults.add(carResult);
 	}
 	
 	public List<CarResult> getCarResults() {

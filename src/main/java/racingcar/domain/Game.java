@@ -9,20 +9,23 @@ import java.util.stream.Collectors;
 
 public class Game {
     private final InputHandler inputHandler;
-    private final OutputHandler outputHandler;
 
-    public Game(InputHandler inputHandler, OutputHandler outputHandler) {
+    private final Race race;
+
+    public Game(InputHandler inputHandler, Race race) {
         this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
+        this.race = race;
     }
 
     public void start() {
         String[] names = inputHandler.inputCarNames();
-        List<Car> cars = Arrays.stream(names)
-                .map(String::trim)
+        List<Car> carList = Arrays.stream(names)
                 .map(Car::from)
                 .collect(Collectors.toList());
+        Cars cars = Cars.from(carList);
+
         int attemptCount = inputHandler.inputAttempts();
 
+        race.startRace(cars, attemptCount);
     }
 }

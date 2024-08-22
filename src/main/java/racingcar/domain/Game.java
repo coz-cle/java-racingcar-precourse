@@ -22,5 +22,7 @@ public class Game {
                 .map(String::trim)
                 .map(Car::from)
                 .collect(Collectors.toList());
+        int attemptCount = inputHandler.inputAttempts();
+
     }
 }

@@ -20,7 +20,18 @@ public final class Reader {
         return st.nextToken();
     }
 
-    public static int nextInt() { return Integer.parseInt(next()); }
+    public static int nextInt() {
+        try {
+            int input = Integer.parseInt(next());
+            if (input <= 0) {
+                throw new IllegalArgumentException("[ERROR] 시도 횟수는 양수여야 합니다.");
+            }
+            return input;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 시도 횟수는 숫자여야 합니다.");
+        }
+    }
+
     public static String nextLine() {
         String str = "";
         try {

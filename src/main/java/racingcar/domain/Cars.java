@@ -49,7 +49,7 @@ public class Cars {
         return cars.stream()
                 .mapToInt(Car::getPosition)
                 .max()
-                .orElse(0);
+                .getAsInt();
     }
 
     @Override

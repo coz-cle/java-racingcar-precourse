@@ -1,0 +1,75 @@
+package racingcar.doamin;
+
+import racingcar.utils.CarValidator;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
+import static racingcar.utils.PrintMessage.*;
+
+public class CarList {
+
+    List<Car> carList = new ArrayList<>();
+
+    /**
+     * 사용자가 입력한 자동차명을 기준으로 CarList 객체에 담음
+     *
+     * @param carNames
+     */
+    public void add(String carNames) {
+        String[] split = carNames.split(CARS_SEPARATOR.getMessage());
+        for (int i = 0; i < split.length; i++) {
+            String carName = split[i];
+            CarValidator.validateLengthAndName(carName);
+            carList.add(new Car(carName));
+        }
+    }
+
+    /**
+     * carList에 담긴 모든 자동차 이동
+     */
+    public void moveAll() {
+        carList.stream()
+                .forEach(Car::forward);
+    }
+
+    /**
+     * 경기 진행 과정을 출력
+     */
+    public void printLog() {
+        carList.stream()
+                .forEach(car -> {
+                    StringBuffer stringBuffer = new StringBuffer();
+                    for (int i = 0; i < car.getPosition(); i++) {
+                        stringBuffer.append("-");
+                    }
+                    System.out.printf("%s : %s%n", car.getName(), stringBuffer);
+                });
+    }
+
+    /**
+     * 우승자를 출력
+     */
+
+    public void printWinner() {
+        List<Car> winners = carList.stream()
+                .max(Comparator.comparing(Car::getPosition))
+                .map(winningCar -> carList.stream()
+                        .filter(car -> car.getPosition() == winningCar.getPosition())
+                        .collect(Collectors.toList())
+                )
+                .orElseThrow(NoSuchElementException::new);
+
+        String winnerNames = winners.stream()
+                .map(Car::getName)
+                .collect(Collectors.joining(WINNER_SEPARATOR.getMessage()));
+
+        System.out.println(PRINT_WINNER.getMessage() + winnerNames);
+
+    }
+
+
+}

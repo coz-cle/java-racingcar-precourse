@@ -45,6 +45,13 @@ public class Cars {
         });
     }
 
+    public int getMaxPosition() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .getAsInt();
+    }
+
     @Override
     public boolean equals(Object diffCars) {
         if (this == diffCars) return true;

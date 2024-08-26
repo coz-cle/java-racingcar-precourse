@@ -1,5 +1,6 @@
 package racingcar.service;
 
+import racingcar.domain.Car;
 import racingcar.domain.dto.CarStatusResponse;
 import racingcar.domain.Cars;
 import racingcar.domain.Race;
@@ -25,7 +26,7 @@ public class RaceService {
         return Race.of(tryCount);
     }
 
-    public List<RaceResultResponse>getRaceResult(
+    public List<RaceResultResponse> getRaceResult(
             final Cars cars,
             final int roundCount
     ) {
@@ -48,6 +49,14 @@ public class RaceService {
     ) {
         List<CarStatusResponse> carRaceResult = carsService.getCarStatus(cars);
         return RaceResultResponse.create(carRaceResult);
+    }
+
+    public List<String> getRaceWinnerCarNames(Cars cars) {
+        int maxPosition = cars.getMaxPosition();
+        return cars.getCars().stream()
+                .filter(car -> car.isWinner(maxPosition))
+                .map(Car::getName)
+                .collect(Collectors.toList());
     }
 
 }

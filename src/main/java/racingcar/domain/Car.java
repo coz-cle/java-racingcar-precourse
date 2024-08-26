@@ -42,6 +42,10 @@ public class Car {
         return position;
     }
 
+    public boolean isWinner(int maxPosition) {
+        return position == maxPosition;
+    }
+
     @Override
     public boolean equals(Object diffCar) {
         if (this == diffCar) return true;
